@@ -1,0 +1,48 @@
+name: Publish v1.1.0
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/release-v1.1.0.yml
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create tag and release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release create v1.1.0 \
+            --repo "${{ github.repository }}" \
+            --target "efeb99bc9a36c0a0b78b749a0c25ce1f40af9d1a" \
+            --title "Universal Agent Workflow Starter v1.1.0" \
+            --notes-file - <<'EOF'
+          ## Universal Agent Workflow Starter v1.1.0
+
+          A reusable, bilingual agent workflow starter created by **ray**.
+
+          ### Highlights
+
+          - **CORE**: stable permission, safety, evidence, and completion rules
+          - **LITE**: the default copy-and-use prompt for ordinary reversible work
+          - **GOVERNED**: stronger controls for sensitive, external, irreversible, or multi-actor work
+          - **Adapters**: generic paste-in guidance, a Codex `AGENTS.md`, and an optional Codex Skill
+          - **Evals**: 12 bilingual behavioral scenarios and regression criteria
+          - **Compatibility**: the original V1.0 prompts remain available unchanged
+
+          Start with **LITE**. Move to **GOVERNED** when action risk or governance needs increase.
+
+          ---
+
+          这是由 **ray** 创建的通用双语 Agent 工作流启动器。
+
+          V1.1.0 将稳定原则、普通任务提示词、高风险治理提示词、Codex 适配器与固定评测场景分层整理；原 V1.0 提示词保持不变。
+          EOF
