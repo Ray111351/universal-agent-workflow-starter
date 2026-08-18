@@ -1,0 +1,4 @@
+interface:
+  display_name: "Universal Agent Workflow"
+  short_description: "Control scope, risk, authorization, and evidence"
+  default_prompt: "Use $universal-agent-workflow to complete this task with the lightest safe workflow."

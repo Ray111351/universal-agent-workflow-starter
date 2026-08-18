@@ -2,100 +2,117 @@
 
 **简体中文** | [English](./README.en.md)
 
-[![Version](https://img.shields.io/badge/version-1.0-blue)](./PROMPT.zh-CN.md)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue)](./CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-CC%20BY%204.0-green)](./LICENSE)
-[![Agent Agnostic](https://img.shields.io/badge/agent-agnostic-purple)](./PROMPT.zh-CN.md)
+[![Modes](https://img.shields.io/badge/modes-LITE%20%7C%20GOVERNED-purple)](./CORE.zh-CN.md)
 
-> 用一段通用提示词，让任何 AI Agent 在动手前先理解任务、控制范围，并在完成后留下可复核证据。
+> 一套能力感知的通用 Agent 工作流：简单任务少走流程，高风险动作严格控制，所有完成声明都有边界和证据。
 
-它适用于 Codex、ChatGPT、Claude、Gemini 及其他 Agent，也适用于软件开发、数据处理、研究、自动化和文档项目。
+它适用于多数能够遵循指令的 AI Agent。文件、工具、项目指令、Skill 和独立会话等能力取决于具体宿主，不由这份提示词授予。
 
-## 为什么需要它
+## 先选一个入口
 
-| 常见 Agent 工作方式 | 使用本工作流后 |
-| --- | --- |
-| 没读完资料就开始修改 | 先确认输入、目标和真实状态 |
-| 讨论中悄悄扩大范围 | 明确允许、禁止和需用户决定的事项 |
-| 计划、实施和验收混在一起 | 分离 PLANNER、EXECUTOR、REVIEWER、ACCEPTOR |
-| 只说“已经完成” | 报告实际变更、验证结果和剩余风险 |
-| 小任务也反复请求批准 | 按 S / M / L 风险自动选择流程 |
+| 使用场景 | 推荐入口 | 特点 |
+| --- | --- | --- |
+| 问答、研究、普通改写、小型开发、可逆任务 | [LITE 中文版](./PROMPT.lite.zh-CN.md) | 默认推荐，短而直接 |
+| 发布、删除、生产、隐私、付费、多 Agent、正式工作单或验收 | [GOVERNED 中文版](./PROMPT.governed.zh-CN.md) | 完整授权、证据与交接控制 |
+| 了解两种模式共同遵循的设计 | [CORE 中文版](./CORE.zh-CN.md) | 稳定规则，不必每次复制 |
+
+英文入口：[LITE](./PROMPT.lite.en.md) · [GOVERNED](./PROMPT.governed.en.md) · [CORE](./CORE.en.md)
 
 ## 30 秒开始
 
-1. 打开[完整中文提示词](./PROMPT.zh-CN.md)。
-2. 复制全文，粘贴到你正在使用的 Agent。
-3. 直接提交任务；Agent 会自动选择角色、风险等级和执行路径。
+1. 普通任务打开 [LITE 中文版](./PROMPT.lite.zh-CN.md)。
+2. 复制全文，粘贴到 Agent 或自定义指令入口。
+3. 直接描述任务、输入和限制；无需手动指定角色或记住阶段名。
 
-也可以使用[完整英文提示词](./PROMPT.en.md)或查看[中文示例](./EXAMPLES.zh-CN.md)。
+最小调用消息：
 
-## 工作流程
+```text
+任务：[你想完成什么]
+输入：[文件、链接、仓库或资料]
+限制：[不能做什么、预算、时间、数据边界]
+```
+
+## V1.1 修复了什么
+
+- 将任务复杂度 `S / M / L` 与动作风险彻底拆开；
+- 将单 Agent、多 Agent 编排与当前职责拆开；
+- 修复 ACCEPT 无法自动到达和“自审等于验收”的歧义；
+- 不再把单独的“可以 / Yes”当作高风险通用授权；
+- 增加执行前即时确认、基线漂移和授权过期；
+- 增加提示注入、密钥、隐私和工具替代边界；
+- 将事实、决策和执行状态分为三组；
+- 只有存在真实取舍时才要求比较多个方案；
+- 为简单任务提供三行启动信息，而不是完整表格。
+
+## 工作流选择
 
 ```mermaid
 flowchart TD
-    A["收到任务"] --> B["核验上下文"]
-    B --> C{"风险等级"}
-    C -->|S| D["直接实施并验证"]
-    C -->|M| E["计划后实施"]
-    C -->|L| F["用户决策与工作单"]
-    D --> G["完成卡"]
-    E --> G
-    F --> H["独立审查与验收"]
+    A["收到任务"] --> B{"会产生副作用吗？"}
+    B -->|否| C["直接回答或只读审查"]
+    B -->|是| D{"动作风险"}
+    D -->|可逆| E["LITE：实施并验证"]
+    D -->|外部 / 不可逆 / 敏感| F["GOVERNED：决策、确认、审查"]
 ```
 
-## 五种角色
+复杂度决定计划深度；动作风险决定授权。一个任务只改一行也可能是高风险，一个大型只读研究也可能不需要审批。
 
-| 角色 | 适用情况 | 主要职责 |
-| --- | --- | --- |
-| `SOLO` | 一个 Agent 端到端处理低风险任务 | 研究、计划、执行、验证 |
-| `PLANNER` | 复杂任务需要先形成方案 | 调研、比较方案、生成工作单 |
-| `EXECUTOR` | 已有明确任务或获批工作单 | 实施、测试、留证 |
-| `REVIEWER` | 需要独立检查已有结果 | 默认只读审查并报告发现 |
-| `ACCEPTOR` | 需要正式判断是否通过 | 对照冻结标准和独立证据验收 |
+## 角色不等于 Agent 数量
 
-## 最简单的调用方式
+V1.1 使用两个独立概念：
 
-```text
-请按照 Universal Agent Workflow 工作，角色设为 SOLO。
-任务是：[你的任务]
-已知输入：[文件、链接、仓库或资料]
-限制：[预算、时间、禁止事项]
-请先给简短任务启动卡，然后按风险等级推进。
-```
+- 编排：`SOLO / SEQUENTIAL / PARALLEL`；
+- 当前职责：`ADVISE / PLAN / EXECUTE / REVIEW / ACCEPT`。
 
-如果你使用多个 Agent：
+一个 Agent 可以按阶段依次承担多个职责。只有需要独立审查时才应使用不同主体或明确说明并不独立；最终 `USER_ACCEPTED` 只能来自用户，除非用户明确委托其他正式验收权。
 
-```text
-GPT Pro / 任意规划模型 = PLANNER
-Codex / 任意执行 Agent = EXECUTOR
-新的独立会话 = REVIEWER
-```
+## 平台适配器
 
-更多可复制模板见[中文实战示例](./EXAMPLES.zh-CN.md)。
+- [适配器说明](./adapters/README.md)
+- [Codex AGENTS.md 模板](./adapters/codex/AGENTS.md)
+- [Codex / ChatGPT Skill](./adapters/codex-skill/universal-agent-workflow/SKILL.md)
+
+`AGENTS.md` 是 Codex 支持的项目指令入口，并不保证所有 Agent 都会自动读取。Skill 适合渐进加载，减少完整版提示词长期占用上下文。
+
+## 示例与回归测试
+
+- [中文实战示例](./EXAMPLES.zh-CN.md)
+- [最小行为 Evals](./EVALS.md)
+
+Evals 覆盖不过度审批、模糊授权、公开发布、提示注入、秘密保护、基线漂移、自我验收、工具不足和并行所有权等场景。
 
 ## 仓库内容
 
 | 文件 | 内容 |
 | --- | --- |
-| [`PROMPT.zh-CN.md`](./PROMPT.zh-CN.md) | 完整中文总控提示词 |
-| [`PROMPT.en.md`](./PROMPT.en.md) | 完整英文总控提示词 |
-| [`EXAMPLES.zh-CN.md`](./EXAMPLES.zh-CN.md) | 中文单 Agent 与多 Agent 示例 |
-| [`EXAMPLES.en.md`](./EXAMPLES.en.md) | 英文单 Agent 与多 Agent 示例 |
-| [`LICENSE`](./LICENSE) | CC BY 4.0 许可 |
+| [`CORE.zh-CN.md`](./CORE.zh-CN.md) / [`CORE.en.md`](./CORE.en.md) | 稳定核心规则 |
+| [`PROMPT.lite.*`](./PROMPT.lite.zh-CN.md) | 默认轻量提示词 |
+| [`PROMPT.governed.*`](./PROMPT.governed.zh-CN.md) | 高风险治理提示词 |
+| [`adapters/`](./adapters/) | 通用、Codex 与 Skill 入口 |
+| [`EVALS.md`](./EVALS.md) | 行为回归测试 |
+| [`EXAMPLES.zh-CN.md`](./EXAMPLES.zh-CN.md) / [`EXAMPLES.en.md`](./EXAMPLES.en.md) | 多领域调用示例 |
+| [`CHANGELOG.md`](./CHANGELOG.md) | 版本变化 |
 
-## 设计原则
+## V1.0 兼容
 
-- 事实与建议分层；
-- 只在批准范围内执行；
-- 实现与验收分离；
-- 保留端到端证据；
-- 小任务快速推进，高风险任务严格控制。
+原始 V1.0 完整提示词继续保留在 [`PROMPT.zh-CN.md`](./PROMPT.zh-CN.md) 和 [`PROMPT.en.md`](./PROMPT.en.md)，现有链接不会失效。新用户默认从 LITE 开始，高风险任务再切换 GOVERNED。
+
+## 限制
+
+这是一套行为协议，不是权限系统。它不能保证所有模型完全遵守，也不能代替 CI、备份、审计、安全控制和人工判断。“跨 Agent”表示设计可移植，不表示每个平台已通过实测；请在 [EVALS](./EVALS.md) 中记录实际结果。
 
 ## 作者与许可
 
-由 **ray** 创建，版本 **V1.0**，发布日期 **2026-08-18**。
+由 **ray** 创建。V1.1.0 发布于 **2026-08-18**。
 
-本项目采用 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 许可。你可以复制、修改、翻译和用于商业或非商业项目，但必须合理署名 `ray` 并说明是否进行了修改。
+采用 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 许可。推荐署名：
 
-## 反馈与贡献
+```text
+Based on Universal Agent Workflow Starter by ray,
+licensed under CC BY 4.0. Changes were made.
+https://github.com/Ray111351/universal-agent-workflow-starter
+```
 
-发现问题或有改进建议，欢迎[提交 Issue](https://github.com/Ray111351/universal-agent-workflow-starter/issues)或 Pull Request。请说明使用的 Agent、任务类型以及建议修改的规则。
+发现问题请[提交 Issue](https://github.com/Ray111351/universal-agent-workflow-starter/issues)，并注明 Agent、模型、工作流版本、任务、期望行为和实际行为。

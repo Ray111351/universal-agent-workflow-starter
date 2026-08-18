@@ -1,15 +1,14 @@
-# Universal Agent Workflow Starter: English Examples
+# Universal Agent Workflow v1.1: English Examples
 
-[Back to English home](./README.en.md) | [Complete English prompt](./PROMPT.en.md) | [中文示例](./EXAMPLES.zh-CN.md)
+[Back to home](./README.en.md) | [LITE](./PROMPT.lite.en.md) | [GOVERNED](./PROMPT.governed.en.md) | [中文示例](./EXAMPLES.zh-CN.md)
 
-The following messages can be copied directly into an agent that has loaded the Universal Agent Workflow.
+Send these messages to an agent that has loaded the relevant workflow. The agent should normally infer duty and risk; users do not need to memorize the terminology.
 
-## Example 1: One Agent Fixes a Bug
+## Example 1: LITE Bug Fix
 
 ```text
-Follow the Universal Agent Workflow with the role set to SOLO.
+Fix an intermittent HTTP 500 response after user login.
 
-Task: Fix an intermittent HTTP 500 response after user login.
 Inputs: the current repository, error logs, and existing tests.
 Constraints:
 - do not change the login API;
@@ -17,71 +16,90 @@ Constraints:
 - do not touch production;
 - preserve my other uncommitted changes.
 
-Find the root cause and start with a concise Task Kickoff Card.
-If this is an S task or an M task with no unresolved decision,
-implement and verify it directly. Finish with a Task Completion Card.
+After finding the root cause, implement the smallest fix and verify it. Ask me
+only when a real decision would change scope or risk.
 ```
 
-## Example 2: A Planning Agent Produces a Work Order
+Expected: the agent briefly states objective, boundary, and verification, then proceeds without requesting duplicate approval.
+
+## Example 2: Read-Only Public Research
 
 ```text
-Follow the Universal Agent Workflow with the role set to PLANNER.
-
-Objective: Add bulk export to the existing application.
-Read the current requirements, API definitions, data model, and tests.
-This task is limited to RESEARCH / DECISION / PLAN. Do not modify code.
-
-Compare at least two genuinely viable approaches, including cost, risk,
-compatibility, and rollback. Consolidate the decisions I need to make.
-Once resolved, produce a USER_APPROVED or PROPOSED WORK ORDER without
-adding any unapproved scope.
+Compare three publicly available person-tracking approaches. Prefer current
+official documentation and primary papers. State source dates, limitations,
+and your inferences. Research only: do not install, purchase, or modify
+anything. End with one recommendation.
 ```
 
-## Example 3: An Execution Agent Implements a Work Order
+Expected: the agent researches and cites sources directly without manufacturing a work order or approval step.
+
+## Example 3: Spreadsheet Cleanup
 
 ```text
-Follow the Universal Agent Workflow with the role set to EXECUTOR.
+Clean customer_feedback.xlsx: normalize dates and category values, remove
+exact duplicate rows, preserve the original sheet, and add cleaned and summary
+sheets.
 
-Read the applicable AGENTS.md, authoritative requirements, and this
-approved work order: [path or content]
-Execution baseline: [branch or commit]
-Authorization for this task: IMPLEMENT + VERIFY.
-
-Stay strictly within the allowed paths. Run the narrowest relevant tests
-first, followed by reasonable regression checks. If a conflict appears,
-stop the affected work and continue unaffected work.
-Finish by reporting actual changes, commands, results, deviations,
-and remaining risks.
+Do not upload the data to an external service or delete the original file.
+Report row-count changes, applied rules, and uncertain records.
 ```
 
-## Example 4: Independent Review
+Expected: complexity may be M, but the action remains reversible. The agent uses a short plan without entering a high-risk workflow.
+
+## Example 4: GOVERNED Public Release
 
 ```text
-Follow the Universal Agent Workflow with the role set to REVIEWER.
+Prepare release v1.2.0: inspect the change, update release notes, and create
+candidate release content.
 
-Perform a read-only review of: [commit, diff, report, or artifact]
-Review basis: [approved work order, requirements, and acceptance criteria]
-
-Inspect the complete change, relevant call paths, tests, artifacts,
-and scope compliance. Rank concrete, locatable, actionable findings P0–P3.
-If there are no findings, write No findings, but do not interpret that
-as final ACCEPTED status.
+You may complete all read-only checks and reversible preparation. Immediately
+before creating a tag or Release, pushing, merging, or sending a public message,
+show me the exact target, baseline, content, and recoverability and wait for
+confirmation.
 ```
 
-## Common User Replies
+Expected: the agent separates preparation from publication and never bypasses EXTERNAL confirmation merely because the edit is small.
+
+## Example 5: Sequential Multi-Agent Work
+
+Planning session:
 
 ```text
-Approved
+Work in the PLAN duty. Inspect the real state and produce a PROPOSED WORK ORDER.
+Do not modify implementation. Compare multiple approaches only when a real
+tradeoff exists, and consolidate the decisions I must make.
 ```
 
-```text
-Approved, with this change: describe the adjustment here
-```
+Execution session:
 
 ```text
-Research only; do not implement
+Work in the EXECUTE duty. Read the approved work order and bound baseline.
+Implement only work traceable to that order, verify it, and preserve evidence.
+If the baseline changes materially, mark authorization STALE_APPROVAL.
 ```
 
+Independent review session:
+
 ```text
-Stop
+Work in the REVIEW duty. Read-only review the named diff, work order, and
+evidence. Rank findings P0–P3. If none are found, write No findings within
+reviewed scope and state what was not inspected.
+```
+
+Expected: these are three sequential duties, not a requirement that every task invoke three agents. Final `USER_ACCEPTED` status still comes from the user.
+
+## Example 6: Explicit High-Risk Authorization
+
+Preferred:
+
+```text
+Approve creation of a public v1.2.0 Release in Ray/example at main@abc123.
+The audience is all GitHub visitors. This does not authorize production
+deployment or additional public messages.
+```
+
+Avoid:
+
+```text
+Yes
 ```
