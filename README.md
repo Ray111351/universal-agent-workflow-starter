@@ -95,3 +95,7 @@ Codex / 任意执行 Agent = EXECUTOR
 由 **ray** 创建，版本 **V1.0**，发布日期 **2026-08-18**。
 
 本项目采用 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 许可。你可以复制、修改、翻译和用于商业或非商业项目，但必须合理署名 `ray` 并说明是否进行了修改。
+
+## 反馈与贡献
+
+发现问题或有改进建议，欢迎[提交 Issue](https://github.com/Ray111351/universal-agent-workflow-starter/issues)或 Pull Request。请说明使用的 Agent、任务类型以及建议修改的规则。
