@@ -96,3 +96,7 @@ See [English examples](./EXAMPLES.en.md) for more copy-ready templates.
 Created by **ray**, version **V1.0**, released **2026-08-18**.
 
 Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). You may copy, adapt, translate, and use this work commercially or non-commercially, provided that you give appropriate credit to `ray` and indicate whether changes were made.
+
+## Feedback and Contributions
+
+Found a problem or have an improvement? [Open an issue](https://github.com/Ray111351/universal-agent-workflow-starter/issues) or submit a pull request. Include the agent, task type, and rule you propose changing.
