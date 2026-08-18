@@ -2,7 +2,7 @@
 
 **简体中文** | [English](./README.en.md)
 
-[![Version](https://img.shields.io/badge/version-1.1_candidate-blue)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue)](./CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-CC%20BY%204.0-green)](./LICENSE)
 [![Modes](https://img.shields.io/badge/modes-LITE%20%7C%20GOVERNED-purple)](./CORE.zh-CN.md)
 
@@ -105,7 +105,7 @@ Evals 覆盖不过度审批、模糊授权、公开发布、提示注入、秘�
 
 ## 作者与许可
 
-由 **ray** 创建。V1.1 candidate 发布于 **2026-08-18**。
+由 **ray** 创建。V1.1.0 发布于 **2026-08-18**。
 
 采用 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 许可。推荐署名：
 

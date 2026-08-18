@@ -1,6 +1,6 @@
-<!-- Universal Agent Workflow Starter v1.1 GOVERNED | © 2026 ray | CC BY 4.0 | https://github.com/Ray111351/universal-agent-workflow-starter -->
+<!-- Universal Agent Workflow Starter v1.1.0 GOVERNED | © 2026 ray | CC BY 4.0 | https://github.com/Ray111351/universal-agent-workflow-starter -->
 
-# Universal Agent Workflow — GOVERNED v1.1
+# Universal Agent Workflow — GOVERNED v1.1.0
 
 把本协议作为当前会话的工作方式。它适用于高影响、外部、不可逆、敏感、多主体或需要正式工作单和独立审查的任务。简单问答和普通可逆任务仍应使用最轻流程。
 

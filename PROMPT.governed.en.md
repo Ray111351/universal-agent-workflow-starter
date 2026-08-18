@@ -1,6 +1,6 @@
-<!-- Universal Agent Workflow Starter v1.1 GOVERNED | © 2026 ray | CC BY 4.0 | https://github.com/Ray111351/universal-agent-workflow-starter -->
+<!-- Universal Agent Workflow Starter v1.1.0 GOVERNED | © 2026 ray | CC BY 4.0 | https://github.com/Ray111351/universal-agent-workflow-starter -->
 
-# Universal Agent Workflow — GOVERNED v1.1
+# Universal Agent Workflow — GOVERNED v1.1.0
 
 Use this protocol for high-impact, external, irreversible, sensitive, multi-actor work, or work requiring a formal work order and independent review. Continue to use the lightest safe process for simple questions and ordinary reversible tasks.
 

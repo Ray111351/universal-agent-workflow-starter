@@ -1,4 +1,4 @@
-<!-- Copy this file to the root of a target repository and add project-specific commands. Universal Agent Workflow Starter v1.1 | © 2026 ray | CC BY 4.0 -->
+<!-- Copy this file to the root of a target repository and add project-specific commands. Universal Agent Workflow Starter v1.1.0 | © 2026 ray | CC BY 4.0 -->
 
 # Repository Agent Workflow
 

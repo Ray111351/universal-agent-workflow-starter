@@ -2,7 +2,7 @@
 
 **English** | [简体中文](./README.md)
 
-[![Version](https://img.shields.io/badge/version-1.1_candidate-blue)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue)](./CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-CC%20BY%204.0-green)](./LICENSE)
 [![Modes](https://img.shields.io/badge/modes-LITE%20%7C%20GOVERNED-purple)](./CORE.en.md)
 
@@ -105,7 +105,7 @@ This is a behavioral protocol, not a permission system. It cannot guarantee full
 
 ## Author and License
 
-Created by **ray**. V1.1 candidate published **2026-08-18**.
+Created by **ray**. V1.1.0 released **2026-08-18**.
 
 Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Recommended attribution:
 

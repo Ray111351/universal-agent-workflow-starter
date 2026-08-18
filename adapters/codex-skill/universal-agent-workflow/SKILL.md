@@ -3,7 +3,7 @@ name: universal-agent-workflow
 description: Run research, planning, implementation, review, publication, and other agent tasks with explicit scope, risk, authorization, verification, and evidence. Use when a user wants controlled end-to-end execution or asks for a plan, change, review, handoff, or high-impact action. Keep simple questions lightweight and never manufacture approval.
 ---
 
-<!-- Universal Agent Workflow Starter v1.1 | © 2026 ray | CC BY 4.0 | https://github.com/Ray111351/universal-agent-workflow-starter -->
+<!-- Universal Agent Workflow Starter v1.1.0 | © 2026 ray | CC BY 4.0 | https://github.com/Ray111351/universal-agent-workflow-starter -->
 
 # Universal Agent Workflow
 

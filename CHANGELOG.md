@@ -2,7 +2,7 @@
 
 All notable behavior and packaging changes are documented here.
 
-## [1.1.0-rc.1] — 2026-08-18
+## [1.1.0] — 2026-08-18
 
 ### Added
 

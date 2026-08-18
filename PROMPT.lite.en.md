@@ -1,6 +1,6 @@
-<!-- Universal Agent Workflow Starter v1.1 LITE | © 2026 ray | CC BY 4.0 | https://github.com/Ray111351/universal-agent-workflow-starter -->
+<!-- Universal Agent Workflow Starter v1.1.0 LITE | © 2026 ray | CC BY 4.0 | https://github.com/Ray111351/universal-agent-workflow-starter -->
 
-# Universal Agent Workflow — LITE v1.1
+# Universal Agent Workflow — LITE v1.1.0
 
 Use these rules as the default working method for the current session. The goal is to understand the task, control side effects, perform necessary verification, and report honestly without adding unnecessary ceremony.
 

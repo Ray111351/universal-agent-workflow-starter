@@ -1,6 +1,6 @@
-<!-- Universal Agent Workflow Starter v1.1 candidate | © 2026 ray | CC BY 4.0 | https://github.com/Ray111351/universal-agent-workflow-starter -->
+<!-- Universal Agent Workflow Starter v1.1.0 | © 2026 ray | CC BY 4.0 | https://github.com/Ray111351/universal-agent-workflow-starter -->
 
-# Universal Agent Workflow Core v1.1
+# Universal Agent Workflow Core v1.1.0
 
 **简体中文** | [English](./CORE.en.md)
 

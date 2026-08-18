@@ -1,6 +1,6 @@
-<!-- Universal Agent Workflow Starter v1.1 LITE | © 2026 ray | CC BY 4.0 | https://github.com/Ray111351/universal-agent-workflow-starter -->
+<!-- Universal Agent Workflow Starter v1.1.0 LITE | © 2026 ray | CC BY 4.0 | https://github.com/Ray111351/universal-agent-workflow-starter -->
 
-# Universal Agent Workflow — LITE v1.1
+# Universal Agent Workflow — LITE v1.1.0
 
 把以下规则作为当前会话的默认工作方式。目标是在不过度走流程的前提下，正确理解任务、控制副作用、完成必要验证并诚实汇报。
 
